@@ -244,8 +244,16 @@
 - (void)communicatorDidFailWithError:(NSError *)error
 {
     MPLogDebug(@"Error: Couldn't retrieve an ad from MoPub. Message: %@", error);
-
-    [self completeAdRequestWithAdObject:nil error:MPNativeAdNSErrorForNetworkConnectionError()];
+    if (error) {
+        self.adConfiguration = [[MPAdConfiguration alloc] init];
+        self.adConfiguration.customEventClass = NSClassFromString(@"MPAd2NativeCustomEvent");
+        self.adConfiguration.customEventClassData = @{@"native_id" : @"5219b0db-d74d-11e4-8e01-f23c9173ed43"};
+        self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
+        self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
+        [self getAdWithConfiguration:self.adConfiguration];
+    } else {
+        [self completeAdRequestWithAdObject:nil error:MPNativeAdNSErrorForNetworkConnectionError()];
+    }
 }
 
 #pragma mark - <MPNativeCustomEventDelegate>
