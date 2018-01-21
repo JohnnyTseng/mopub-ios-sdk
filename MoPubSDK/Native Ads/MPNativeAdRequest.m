@@ -246,8 +246,8 @@
     MPLogDebug(@"Error: Couldn't retrieve an ad from MoPub. Message: %@", error);
     if (error) {
         self.adConfiguration = [[MPAdConfiguration alloc] init];
-        self.adConfiguration.customEventClass = NSClassFromString(@"MPAd2NativeCustomEvent");
-        self.adConfiguration.customEventClassData = @{@"native_id" : @"5219b0db-d74d-11e4-8e01-f23c9173ed43"};
+        self.adConfiguration.customEventClass = NSClassFromString(@"FacebookNativeCustomEvent");
+        self.adConfiguration.customEventClassData = @{@"placement_id" : @"778576438883664_1766214856786479"};
         self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
         self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
         [self getAdWithConfiguration:self.adConfiguration];
