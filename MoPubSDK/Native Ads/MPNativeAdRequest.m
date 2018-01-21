@@ -248,8 +248,8 @@
         self.adConfiguration = [[MPAdConfiguration alloc] init];
         self.adConfiguration.customEventClass = NSClassFromString(@"FacebookNativeCustomEvent");
         self.adConfiguration.customEventClassData = @{@"placement_id" : @"778576438883664_1766214856786479"};
-        self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
-        self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.FUCK.YOU.ADBLOCK.com"];
+        self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
+        self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
         [self getAdWithConfiguration:self.adConfiguration];
     } else {
         [self completeAdRequestWithAdObject:nil error:MPNativeAdNSErrorForNetworkConnectionError()];
