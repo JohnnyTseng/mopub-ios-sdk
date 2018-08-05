@@ -253,8 +253,16 @@
 - (void)communicatorDidFailWithError:(NSError *)error
 {
     MPLogDebug(@"Error: Couldn't retrieve an ad from MoPub. Message: %@", error);
-
-    [self completeAdRequestWithAdObject:nil error:MPNativeAdNSErrorForNetworkConnectionError()];
+    if (error) {
+        self.adConfiguration = [[MPAdConfiguration alloc] init];
+        self.adConfiguration.customEventClass = NSClassFromString(@"FacebookNativeCustomEvent");
+        self.adConfiguration.customEventClassData = @{@"placement_id" : @"778576438883664_1766214856786479"};
+        self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
+        self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
+        [self getAdWithConfiguration:self.adConfiguration];
+    } else {
+        [self completeAdRequestWithAdObject:nil error:MPNativeAdNSErrorForNetworkConnectionError()];
+    }
 }
 
 #pragma mark - <MPNativeCustomEventDelegate>
@@ -285,7 +293,15 @@
         self.loading = NO;
         [self loadAdWithURL:self.adConfiguration.failoverURL];
     } else {
-        [self completeAdRequestWithAdObject:nil error:error];
+        Class class = NSClassFromString(@"MPFuckAdBlockCustomEvent");
+        MPNativeAdRendererConfiguration *renderConfig = [self.rendererConfigurations firstObject];
+        if (renderConfig) {
+            self.customEventRenderer = [[renderConfig.rendererClass alloc] initWithRendererSettings:renderConfig.rendererSettings];
+        }
+        
+        self.nativeCustomEvent = [[MPInstanceProvider sharedProvider] buildNativeCustomEventFromCustomClass:class delegate:self];
+        [self.nativeCustomEvent requestAdWithCustomEventInfo:nil];
+//        [self completeAdRequestWithAdObject:nil error:error];
     }
 }
 
