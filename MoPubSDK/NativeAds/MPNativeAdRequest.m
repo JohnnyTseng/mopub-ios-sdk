@@ -293,14 +293,19 @@
         self.loading = NO;
         [self loadAdWithURL:self.adConfiguration.failoverURL];
     } else {
-        Class class = NSClassFromString(@"MPFuckAdBlockCustomEvent");
-        MPNativeAdRendererConfiguration *renderConfig = [self.rendererConfigurations firstObject];
-        if (renderConfig) {
-            self.customEventRenderer = [[renderConfig.rendererClass alloc] initWithRendererSettings:renderConfig.rendererSettings];
-        }
-        
-        self.nativeCustomEvent = [[MPInstanceProvider sharedProvider] buildNativeCustomEventFromCustomClass:class delegate:self];
-        [self.nativeCustomEvent requestAdWithCustomEventInfo:nil];
+//        self.adConfiguration = [[MPAdConfiguration alloc] init];
+//        self.adConfiguration.customEventClass = NSClassFromString(@"FacebookNativeCustomEvent");
+//        self.adConfiguration.customEventClassData = @{@"placement_id" : @"778576438883664_1766214856786479"};
+//        self.adConfiguration.impressionTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
+//        self.adConfiguration.clickTrackingURL = [NSURL URLWithString:@"http://www.HAHA.com"];
+//        [self getAdWithConfiguration:self.adConfiguration];
+//        Class class = NSClassFromString(@"MPFuckAdBlockCustomEvent");
+//        MPNativeAdRendererConfiguration *renderConfig = [self.rendererConfigurations firstObject];
+//        if (renderConfig) {
+//            self.customEventRenderer = [[renderConfig.rendererClass alloc] initWithRendererSettings:renderConfig.rendererSettings];
+//        }
+//        self.nativeCustomEvent = [renderConfig.custom
+//        [self.nativeCustomEvent requestAdWithCustomEventInfo:nil];
 //        [self completeAdRequestWithAdObject:nil error:error];
     }
 }
